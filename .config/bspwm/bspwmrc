@@ -1,0 +1,31 @@
+#! /bin/sh
+
+sxhkd &
+
+bspc config border_width         3
+bspc config window_gap           40
+bspc config top_padding	 	   	 60
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config focus_by_distance    true
+bspc config history_aware_focus  true
+
+bspc monitor DVI-I-1 -d 01 10
+bspc monitor DVI-D-0 -d 01 10 11 100 101 110
+
+bspc rule -a vivaldi-stable desktop=^3
+bspc rule -a mpv state=floating
+bspc rule -a thunar state=floating
+
+# tint2
+$HOME/.config/lemonbuddy/launch.sh
+
+xrandr --output DVI-I-1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-0 --off --output DVI-D-0 --mode 1920x1080 --rate 144 --pos 1920x0 --rotate normal --output DVI-I-0 --off --output DP-1 --off --output DP-0 --off
+
+# fan adjust script
+nvautoadjust &
+
+# exec redshift
+redshift

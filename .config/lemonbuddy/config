@@ -1,0 +1,160 @@
+;=====================================================
+;
+;   To learn more about how to configure Lemonbuddy
+;   go to https://github.com/jaagr/lemonbuddy
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+[settings]
+; Limit the amount of events sent to lemonbar within a set timeframe:
+; - "Allow <throttle_limit> updates within <throttle_ms> of time"
+; Default values:
+;throttle_limit = 5
+;throttle_ms = 50
+
+
+; bar that acts as border
+[bar/bar1-border]
+monitor = DVI-I-1
+bottom = false
+dock = false
+
+width = 1840
+height = 30
+
+offset_x = 1960
+offset_y = 30
+
+background = #817F7F
+
+font-0 = tewi:size=8;0
+font-1 = fixed:size=8:style=ja;0
+modules-center = label
+
+
+[bar/bar1]
+monitor = DVI-D-0
+bottom = false
+dock = false
+
+width = 1834
+height = 24
+
+offset_x = 1963
+offset_y = 33
+
+background = #282c34
+foreground = #abb2bf
+
+spacing = 1
+lineheight = 1
+
+padding_left = 3
+padding_right = 3
+module_margin_left = 0
+module_margin_right = 0
+
+font-0 = tewi:size=8;0
+font-1 = fixed:size=8:style=ja;0
+modules-left = bspwm title
+modules-right = mpc volume cpu ram clock
+
+[bar/bar2]
+monitor = DVI-I-1
+bottom = false
+dock = false
+
+width = 1834
+height = 24
+
+offset_x = 43
+offset_y = 33
+
+background = #282c34
+foreground = #abb2bf
+
+spacing = 1
+lineheight = 1
+
+padding_left = 3
+padding_right = 3
+module_margin_left = 0
+module_margin_right = 0
+
+font-0 = tewi:size=8;0
+font-1 = fixed:size=8:style=ja;0
+
+modules-left = bspwm title
+modules-right = volume cpu ram clock
+
+[bar/bar2-border]
+monitor = DVI-D-0
+bottom = false
+dock = false
+
+width = 1840
+height = 30
+
+offset_x = 40
+offset_y = 30
+
+background = #817F7F
+
+font-0 = tewi:size=8;0
+font-1 = fixed:size=8:style=ja;0
+modules-center = label
+
+[module/label]
+type = custom/text
+content = secrets :^)
+
+[module/cpu]
+type = internal/cpu
+label = cpu: %percentage%
+format-padding = 2
+
+[module/ram]
+type = internal/memory
+label = ram: %percentage_used%
+format-padding = 2
+
+[module/clock]
+type = internal/date
+date = %Y-%m-%d %H:%M:%S
+format-padding = 2
+
+[module/volume]
+type = internal/volume
+format-volume-padding = 2
+format-muted-padding = 2
+
+label-volume = vol: %percentage%
+label-muted =  vol: mtd
+
+[module/bspwm]
+type = internal/bspwm
+label-active = ◼
+label-active-padding = 1
+label-active-foreground = #61afef
+label-occupied = ◪
+label-occupied-padding = 1
+label-empty = ◻
+label-empty-padding = 1
+label-empty-foreground = #5c6370
+
+[module/title]
+type = custom/script
+exec = xtitle -s
+tail = true
+format-foreground = #61afef
+format-padding = 2
+
+
+[module/mpc]
+type = custom/script
+exec = printf "%s\n" "sng: %{A1:mpc -q prev:}%{A2:mpc -q toggle:}%{A3:mpc -q next:}%{A4:mpc -q volume -5:}%{A5:mpc -q volume +5:}$(mpc current)%{F-}%{A}%{A}%{A}%{A}%{A}"
+tail = true
+
+; vim:ft=dosini
